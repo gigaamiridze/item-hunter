@@ -22,7 +22,7 @@ function PixiGame() {
     app.stage.addChild(player);
 
     const item = Sprite.from('../images/item.png');
-    item.x = app.view.width / 2;
+    item.x = app.view.width / 2 - 50;
     item.y = app.view.height / 2 + 100;
     item.width = 100;
     item.height = 100;
@@ -30,7 +30,7 @@ function PixiGame() {
     item.on('click', () => dispatch(incrementScore()));
     app.stage.addChild(item);
 
-    const scoreText = new Text('Score 0', {
+    const scoreText = new Text('Item Hunter', {
       fontFamily: 'Arial',
       fontWeight: 'bold',
       fontSize: 24,
