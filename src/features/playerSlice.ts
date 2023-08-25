@@ -1,5 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import { IPlayerState } from '../interfaces';
+import { RootState } from '../store';
 
 const initialState: IPlayerState = {
   x: 0,
@@ -22,4 +23,6 @@ const playerSlice = createSlice({
 });
 
 export const { movePlayer, incrementScore } = playerSlice.actions;
+export const selectPlayerState = (state: RootState) => state.player;
+
 export default playerSlice.reducer;
