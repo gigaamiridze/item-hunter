@@ -13,8 +13,8 @@ const playerSlice = createSlice({
   initialState,
   reducers: {
     movePlayer: (state, action: PayloadAction<{ x: number; y: number }>) => {
-      state.x = action.payload.x;
-      state.y = action.payload.y;
+      state.x += action.payload.x;
+      state.y += action.payload.y;
     },
     incrementScore: (state) => {
       state.score += 1;

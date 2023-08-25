@@ -1,10 +1,11 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as PIXI from 'pixi.js';
-import { incrementScore } from '../features';
 import { root } from '../main.tsx';
+import { movePlayer, incrementScore, selectPlayerState } from '../features';
 
 function PixiGame() {
+  const playerState = useSelector(selectPlayerState);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -28,6 +29,29 @@ function PixiGame() {
     item.interactive = true;
     item.on('click', () => dispatch(incrementScore()));
     app.stage.addChild(item);
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      const speed = 5;
+      const { key } = event;
+
+      switch (key) {
+        case 'ArrowUp':
+          return dispatch(movePlayer({ x: playerState.x, y: playerState.y - speed }));
+        case 'ArrowDown':
+          return dispatch(movePlayer({ x: playerState.x, y: playerState.y + speed }));
+        case 'ArrowLeft':
+          return dispatch(movePlayer({ x: playerState.x - speed, y: playerState.y }));
+        case 'ArrowRight':
+          return dispatch(movePlayer({ x: playerState.x + speed, y: playerState.y }));
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      app.destroy();
+      window.removeEventListener('keydown', handleKeyDown);
+    };
   }, [dispatch]);
 
   return null;
