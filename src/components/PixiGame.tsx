@@ -1,8 +1,12 @@
 import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import * as PIXI from 'pixi.js';
+import { incrementScore } from '../features';
 import { root } from '../main.tsx';
 
 function PixiGame() {
+  const dispatch = useDispatch();
+
   useEffect(() => {
     const app = new PIXI.Application({ width: 800, height: 500 });
 
@@ -22,8 +26,9 @@ function PixiGame() {
     item.width = 100;
     item.height = 100;
     item.interactive = true;
+    item.on('click', () => dispatch(incrementScore()));
     app.stage.addChild(item);
-  }, []);
+  }, [dispatch]);
 
   return null;
 }
