@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Application, Sprite, Text } from 'pixi.js';
-import { root } from '../main.tsx';
 import { movePlayer, incrementScore, selectPlayerState } from '../features';
 
 function PixiGame() {
@@ -10,9 +9,10 @@ function PixiGame() {
 
   useEffect(() => {
     const app = new Application({ width: 800, height: 500 });
+    const appElement = document.querySelector('.App');
 
-    if (root) {
-      root.appendChild(app.view as HTMLCanvasElement);
+    if (appElement) {
+      appElement.appendChild(app.view as HTMLCanvasElement);
     }
 
     const player = Sprite.from('../images/player.png');

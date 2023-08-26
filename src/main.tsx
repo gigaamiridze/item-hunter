@@ -5,9 +5,9 @@ import store from './store';
 import './styles/reset.css';
 import './styles/index.css';
 
-export const root = document.getElementById('root');
+const root = ReactDOM.createRoot(document.getElementById('root')!);
 
-ReactDOM.createRoot(root!).render(
+root.render(
   <Provider store={store}>
     <App />
   </Provider>
